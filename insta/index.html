@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя Instagram Визитка</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QEPFB6CL9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --accent-color: #E1306C;
+            --card-bg: #1e1e1e;
+            --shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+        
+        .light-theme {
+            --bg-color: #f5f7fa;
+            --text-color: #333333;
+            --accent-color: #E1306C;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            margin: 0 auto 20px;
+            display: block;
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);
+        }
+        
+        .links {
+            margin-top: 20px;
+        }
+        
+        .link {
+            display: block;
+            margin: 15px 0;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        
+        .link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <button class="theme-toggle" id="themeToggle">🌓</button>
+        <img src="https://via.placeholder.com/120" alt="Мой аватар" class="avatar">
+        <h1>Привет, я [Ваше имя]</h1>
+        <p>Фотограф | Дизайнер | Блогер</p>
+        
+        <a href="https://www.instagram.com/ilvutei/" class="btn" id="instagramBtn">Подписаться в Instagram</a>
+        
+        <div class="links">
+            <a href="#" class="link">Мой портфолио</a>
+            <a href="#" class="link">Telegram-канал</a>
+            <a href="#" class="link">YouTube</a>
+            <a href="#" class="link">Связаться со мной</a>
+        </div>
+    </div>
+
+    <script>
+        // Переключение темы
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            const isLight = body.classList.contains('light-theme');
+            themeToggle.textContent = isLight ? '🌙' : '☀️';
+            
+            // Отправка события в Google Analytics
+            gtag('event', 'theme_change', {
+                'theme': isLight ? 'light' : 'dark'
+            });
+        });
+        
+        // Отслеживание клика по кнопке Instagram
+        document.getElementById('instagramBtn').addEventListener('click', function() {
+            gtag('event', 'click', {
+                'event_category': 'Button',
+                'event_label': 'Instagram Subscribe'
+            });
+        });
+        
+        // Отслеживание просмотра страницы
+        gtag('event', 'page_view', {
+            'page_title': 'Instagram Landing Page',
+            'page_location': window.location.href,
+            'theme': body.classList.contains('light-theme') ? 'light' : 'dark'
+        });
+    </script>
+</body>
+</html>
