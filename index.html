@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Card of Ivan</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --accent-color: #E1306C;
+            --card-bg: #1e1e1e;
+            --shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        .light-theme {
+            --bg-color: #f5f7fa;
+            --text-color: #333333;
+            --accent-color: #E1306C;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        .link {
+            display: block;
+            margin: 15px 0;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-color);
+            opacity: 0;
+            animation: fadeInFooter 1.5s ease 1.2s forwards;
+        }
+
+        @keyframes fadeInFooter {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 0.6;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <button class="theme-toggle" id="themeToggle">🌓</button>
+        <img src="avatar.jpeg" alt="Ivan's photo" class="avatar" onerror="this.style.display='none'">
+        <h1>Hi, I'm Ivan</h1>
+        <p>Photographer | Designer | Blogger</p>
+
+        <a href="https://www.instagram.com/ilvutei/" class="btn">Follow on Instagram</a>
+
+        <div class="links">
+            <a href="https://t.me/ilvutei" class="link">Telegram Bot by me</a>
+            <a href="https://youtube.com/ilvutei" class="link">Portfolio</a>
+            <a href="contact.html" class="link">Contact Me</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            Coded with ☕ and a dream by Ivan
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            const isLight = body.classList.contains('light-theme');
+            themeToggle.textContent = isLight ? '🌙' : '☀️';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-theme');
+            themeToggle.textContent = '🌙';
+        }
+    </script>
+</body>
+</html>
